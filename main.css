@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+  }
+
+  .statusbar {
+    border: 1px solid grey;
+    padding: 20px;
+  }
+
+  .statusbar h1 {
+    display: inline;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid grey;
+    font-family: 'Roboto', sans-serif;
+
+  }
+  
+  .answers-list > li {
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  
+ main {
+    padding: 20px;
+  }
