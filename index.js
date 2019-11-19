@@ -53,75 +53,76 @@ const STATES = [
     answer: "Jackson"
     },
 ];
+//---------------Array-END----------------
 
 //Array to store the Score
 const USERRESPONSES = [];
 let currentQuestionIndex = 0;
 let questionComponents = STATES[currentQuestionIndex];
 
+//Declare Variable for the Answers
+let answerIndex = 2;
+
+//Testing the display of the question
 console.log(questionComponents.question);
-//Here I will start the new psudocode to be exicuted properly, I like the stuff I have before this  but not really the stuff I have after this.
+//testing the display of the Answers
+console.log(questionComponents.allAnswers[answerIndex]);
+
+//Step through the incrementing of the currentQuestionIndex
 
 //function 'nextQuestion' that steps us through the STORE objects and increments the current place holder variable
   //This function needs to be initiated by the click of the user
   //This function maybe has a if statement to clarify the item clicked
     //In this if statement i will need to verify
 function nextQuestion() {
-  $('#submission-form').on('click', '.submit-btn', event => {
+  $('#submission-form').on('click', '.js-submit-btn', event => {
     event.preventDefault();
     console.log('`nextQuestion` ran');
     generateTheQuestion();
-    currentQuestionIndex++;
-    console.log(questionComponents.question);
     });
 }
 
 //This function generates the question
 function generateTheQuestion(theQuestion) {
   console.log("Generate the Question");
-  console.log(currentQuestionIndex);
-  console.log(questionComponents.question);
 }
-
+//----------------NOT-MINE----------------
+// this generates the question and checks first to see if we are finished if not displays
+function generateQuestion() {
+  if (questionNumber < STORE.length) {
+    return createThing(questionNumber);
+  } else {
+    $('.questionBox').hide();
+    finalScore();
+    $('.questionNumber').text(10);
+  }//----------------NOT-MINE----------------
+}
+//----------------NOT-MINE----------------
 //This function increments the allAnswers to add a button to each
+//creates html for question form
+function createThing(questionIndex) {
+  let formMaker = $(`<form>
+    <fieldset>
+      <legend class="questionText">${STORE[questionIndex].question}</legend>
+    </fieldset>
+  </form>`)
 
+  let fieldSelector = $(formMaker).find('fieldset');
 
-//------------------------------------------------------------------------------
-//Function 'generateQuestion' that creates the HTML elements for the question
-function generateQuestion(currentQuestion) {
-    /*return    `
-    <p>${questionComponents.question}</p>
-            <li data-item-id="${currentQuestion.question}">
-                <div class="answer-selection">
-                    <button class="check-box">-
-                    </button>
-                    <span class="capitol">${currentQuestion.allAnswers}</span>
-                </div>
-            </li>`;*///Use a foreach array method to assign a button to each answer
-            console.log(questionComponents.question)
-  }
+  STORE[questionIndex].answers.forEach(function (answerValue, answerIndex) {
+    $(`<label class="sizeMe" for="${answerIndex}">
+        <input class="radio" type="radio" id="${answerIndex}" value="${answerValue}" name="answer" required>
+        <span>${answerValue}</span>
+      </label>
+      `).appendTo(fieldSelector);
+  });
+  $(`<button type="submit" class="submitButton button"> Submit</button > `).appendTo(fieldSelector);
+  return formMaker;
+}//----------------NOT-MINE----------------
 
-//Check answer
-/*function checkAnswer(rightAnswer) {
-    console.log(`Checking "${rightAnswer}" from STATES`);
-    const questionIndex = STATES.findIndex(question => question.question === questionIndex);
-    STATES.//invoke the change of the boolean to true or leave  it false
-  };
-*/
-
-//Function 'userClicks' that takest users click and verifies if it is the right answer.
-    //This function maybe has a if statement to clarify the item clicked
-        //In this if statement i will need to verify if it is clicking a radio button to decide the answer then invoke the correct -
-        //answer function that will change the variable that is a global variable for right or wrong answers and also invoke the result page
-function handleStart() {
-  $('#submission-form').on('click', '.submit-btn', event => {
-    event.preventDefault();
-    console.log('`handleSubmit` ran');
-    });
-}
 //Render Function onReady
 function quizApp() {
-    //generateQuestion();
+    //generateTheQuestion();
     nextQuestion();
 }
 
