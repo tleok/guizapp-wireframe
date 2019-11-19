@@ -60,18 +60,8 @@ let currentQuestionIndex = 0;
 let questionComponents = STATES[currentQuestionIndex];
 
 console.log(questionComponents.question);
-//Function 'generateQuestion' that creates the HTML elements for the question
-function generateQuestion(currentQuestion) {
-    return `
-    <p>${currentQuestion.question}</p>
-            <li data-item-id="${currentQuestion.question}">
-                <div class="answer-selection">
-                    <button class="check-box">-
-                    </button>
-                    <span class="capitol">${currentQuestion.allAnswers}</span>
-                </div>
-            </li>`;//Use a foreach array method to assign a button to each answer
-  }
+//Here I will start the new psudocode to be exicuted properly, I like the stuff I have before this  but not really the stuff I have after this.
+
 //function 'nextQuestion' that steps us through the STORE objects and increments the current place holder variable
   //This function needs to be initiated by the click of the user
   //This function maybe has a if statement to clarify the item clicked
@@ -79,16 +69,32 @@ function generateQuestion(currentQuestion) {
 function nextQuestion() {
   $('#submission-form').on('click', '.submit-btn', event => {
     event.preventDefault();
-    console.log('`handleSubmit` ran');
+    console.log('`nextQuestion` ran');
     });
 }
 
+
+//Function 'generateQuestion' that creates the HTML elements for the question
+function generateQuestion(currentQuestion) {
+    /*return    `
+    <p>${questionComponents.question}</p>
+            <li data-item-id="${currentQuestion.question}">
+                <div class="answer-selection">
+                    <button class="check-box">-
+                    </button>
+                    <span class="capitol">${currentQuestion.allAnswers}</span>
+                </div>
+            </li>`;*///Use a foreach array method to assign a button to each answer
+            console.log(questionComponents.question)
+  }
+
 //Check answer
-function checkAnswer(rightAnswer) {
+/*function checkAnswer(rightAnswer) {
     console.log(`Checking "${rightAnswer}" from STATES`);
     const questionIndex = STATES.findIndex(question => question.question === questionIndex);
     STATES.//invoke the change of the boolean to true or leave  it false
   };
+*/
 
 //Function 'userClicks' that takest users click and verifies if it is the right answer.
     //This function maybe has a if statement to clarify the item clicked
@@ -103,7 +109,7 @@ function handleStart() {
 //Render Function onReady
 function quizApp() {
     //generateQuestion();
-    handleStart();
+    nextQuestion();
 }
 
 $(quizApp);
