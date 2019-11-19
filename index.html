@@ -8,22 +8,22 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container js-container">
         <header>
             <h1>US State Capitols Quiz</h1>
         </header>
         <nav>
-            <div class="statusbar">
-                <h1>Q: 4/10</h1>
-                <h1>Grade: 3/10</h1>
+            <div class="statusbar js-statusbar">
+                <h1>Question: <span class="currentQuestionNumber js-currentQuestionNumber">0</span>/10</h1>
+                <h1>Score: <span class="currentScore js-currentScore">0</span>/10</h1>
             </div>
         </nav>
         <main>
             <p>How well do you know the US State Capitols?</p>
-            <form id="submission-form">
-                <ul class="answers-list">
+            <form id="submission-form js-submission-form">
+                <ul class="answers-list js-answers-list">
                 </ul>
-                <button type="submit" class="submit-btn" >Start Quiz</button>
+                <button type="submit" class="submit-btn js-submit-btn" >Start Quiz</button>
             </form>
         </main>
     </div>

@@ -70,10 +70,23 @@ function nextQuestion() {
   $('#submission-form').on('click', '.submit-btn', event => {
     event.preventDefault();
     console.log('`nextQuestion` ran');
+    generateTheQuestion();
+    currentQuestionIndex++;
+    console.log(questionComponents.question);
     });
 }
 
+//This function generates the question
+function generateTheQuestion(theQuestion) {
+  console.log("Generate the Question");
+  console.log(currentQuestionIndex);
+  console.log(questionComponents.question);
+}
 
+//This function increments the allAnswers to add a button to each
+
+
+//------------------------------------------------------------------------------
 //Function 'generateQuestion' that creates the HTML elements for the question
 function generateQuestion(currentQuestion) {
     /*return    `
