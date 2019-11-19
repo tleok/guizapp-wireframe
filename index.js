@@ -54,33 +54,56 @@ const STATES = [
     },
 ];
 
+//Array to store the Score
+const USERRESPONSES = [];
+let currentQuestionIndex = 0;
+let questionComponents = STATES[currentQuestionIndex];
+
+console.log(questionComponents.question);
 //Function 'generateQuestion' that creates the HTML elements for the question
-function generateQuestion(que) {
+function generateQuestion(currentQuestion) {
     return `
-    <p>${que.question}</p>
-    <form id="submission-form">
-        <ul class="answers-list">
-            <li>
+    <p>${currentQuestion.question}</p>
+            <li data-item-id="${currentQuestion.question}">
                 <div class="answer-selection">
                     <button class="check-box">-
                     </button>
-                    <span class="capitol">${que.allAnswers}</span>
+                    <span class="capitol">${currentQuestion.allAnswers}</span>
                 </div>
-            </li>
-        </ul>
-            <button type="button" class="submit-btn" >Submit</button>
-    </form>`;
+            </li>`;//Use a foreach array method to assign a button to each answer
   }
-
-//Function to check if the user got the answer correct
-
 //function 'nextQuestion' that steps us through the STORE objects and increments the current place holder variable
+  //This function needs to be initiated by the click of the user
+  //This function maybe has a if statement to clarify the item clicked
+    //In this if statement i will need to verify
+function nextQuestion() {
+  $('#submission-form').on('click', '.submit-btn', event => {
+    event.preventDefault();
+    console.log('`handleSubmit` ran');
+    });
+}
+
+//Check answer
+function checkAnswer(rightAnswer) {
+    console.log(`Checking "${rightAnswer}" from STATES`);
+    const questionIndex = STATES.findIndex(question => question.question === questionIndex);
+    STATES.//invoke the change of the boolean to true or leave  it false
+  };
 
 //Function 'userClicks' that takest users click and verifies if it is the right answer.
-
+    //This function maybe has a if statement to clarify the item clicked
+        //In this if statement i will need to verify if it is clicking a radio button to decide the answer then invoke the correct -
+        //answer function that will change the variable that is a global variable for right or wrong answers and also invoke the result page
+function handleStart() {
+  $('#submission-form').on('click', '.submit-btn', event => {
+    event.preventDefault();
+    console.log('`handleSubmit` ran');
+    });
+}
 //Render Function onReady
 function quizApp() {
-    generateQuestion();
+    //generateQuestion();
+    handleStart();
 }
 
 $(quizApp);
