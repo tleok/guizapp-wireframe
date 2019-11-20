@@ -72,11 +72,11 @@ function userStart() {
 }
 //function 'userSubmit' only submits when one is selected and creates the submit button
 function userSubmit() {
-  $('.js-btn-container').on('click', '.js-submit-btn', event => {
+  $('.js-btn-container').on('submit', function(event) {
     event.preventDefault();
     console.log('`userSubmit` ran');
-    $('.js-submit-btn').hide();
-    $('.js-answers-list').children().remove();
+    //$('.js-submit-btn').hide();
+    //$('.js-answers-list').children().remove();
     let choice = $('input:checked');
     let currentAnswer = choice.val();
     let correctAnswer = STATES[currentQuestionIndex].answer;
@@ -87,22 +87,26 @@ function userSubmit() {
     }
     });
 }
-//-------------------------------
+//Right Answer display
 function rightAnswer() {
   $('.js-theQuestion').html(
     `<h3>Your answer is correct!</h3>
     <button type="submit" class="next-btn js-next-btn" >Next Question</button>`
   );
-  USERRESPONSES.push(true);
+  incrementScore();
 }
-//resulting feedback if a selected answer is incorrect
+//wrong Answer display
 function wrongAnswer() {
   $('.response').html(
     `<h3>That's the wrong answer...</h3>
     <button type="submit" class="next-btn js-next-btn" >Next Question</button>`
   );
 }
-//--------------------------------
+//push the score to the array and to the display
+function incrementScore() {
+  USERRESPONSES.push(true);
+  $('.js-currentScor').text(USERRESPONSES.length);
+}
 
 //This function generates the question
 function generateTheQuestion() {
