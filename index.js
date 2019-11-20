@@ -59,33 +59,59 @@ const STATES = [
 const USERRESPONSES = [];
 let currentQuestionIndex = 0;
 let questionComponents = STATES[currentQuestionIndex];
-
 //Declare Variable for the Answers
-let answerIndex = 2;
-
+let answerIndex = 0;
 //Testing the display of the question
 console.log(questionComponents.question);
 //testing the display of the Answers
 console.log(questionComponents.allAnswers[answerIndex]);
-
 //Step through the incrementing of the currentQuestionIndex
 
 //function 'nextQuestion' that steps us through the STORE objects and increments the current place holder variable
   //This function needs to be initiated by the click of the user
   //This function maybe has a if statement to clarify the item clicked
     //In this if statement i will need to verify
-function nextQuestion() {
-  $('#submission-form').on('click', '.js-submit-btn', event => {
+function userClick() {
+  $('#js-submission-form').on('click', '.js-submit-btn', event => {
     event.preventDefault();
-    console.log('`nextQuestion` ran');
+    console.log('`userClick` ran');
     generateTheQuestion();
+    incrementQuestionIndex();
     });
 }
 
 //This function generates the question
-function generateTheQuestion(theQuestion) {
-  console.log("Generate the Question");
+function generateTheQuestion() {
+  console.log("`generateTheQuestion` ran");
+  renderQuestion();
 }
+function renderQuestion(){
+  console.log("`renderQuestionder` ran")
+$('.js-theQuestion').text(questionComponents.question);
+}
+function incrementQuestionIndex(){
+  currentQuestionIndex++;
+  $('.js-currentQuestionNumber').text(currentQuestionIndex);
+}
+//Increment the Answers
+
+//Render Function onReady
+function quizApp() {
+  //generateTheQuestion();
+  userClick();
+}
+
+$(quizApp);
+
+
+
+
+
+
+
+
+
+
 //----------------NOT-MINE----------------
 // this generates the question and checks first to see if we are finished if not displays
 function generateQuestion() {
@@ -120,10 +146,3 @@ function createThing(questionIndex) {
   return formMaker;
 }//----------------NOT-MINE----------------
 
-//Render Function onReady
-function quizApp() {
-    //generateTheQuestion();
-    nextQuestion();
-}
-
-$(quizApp);
