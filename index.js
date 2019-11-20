@@ -1,5 +1,6 @@
 'use strict';
-
+let quizStarted = false;
+let isSubmittingAnswer = false;
 //Create a array containing the questions as objects
 const STATES = [
     { //Question 1
@@ -60,23 +61,50 @@ const USERRESPONSES = [];
 let currentQuestionIndex = 0;
 //---------let questionComponents = STATES[currentQuestionIndex];
 
-//function 'userSubmitClick' takes the start, submit, and next question
-function userStart() {
-  $('#js-submission-form').on('click', '.js-start-btn', event => {
+//function 'userStart' takes the start, submit, and next question
+//assigns the click event handler on the start button
+function initEventHandlers() {
+  $('#js-submission-form').on('click', '.js-btn', event => {
     event.preventDefault();
     console.log('`userStart` ran');
-    $('.js-start-btn').hide();
+    if(quizStarted === false){
+      quizStarted = true;
+      isSubmittingAnswer = true;
+      showNextQuestion();
+    } else if(isSubmittingAnswer === true){
+      //Show summary
+      isSubmittingAnswer = false;
+    } else{
+        if(currentQuestionIndex === STATES.length -1){
+          //Show Final Summary
+        } else{
+        showNextQuestion();
+        isSubmittingAnswer = true;
+        }
+    }
+    });
+}
+function showNextQuestion() {
+  generateTheQuestion();
+  incrementQuestionIndex();
+}
+//function 'userNext' takes the start, submit, and next question
+function userNext() {
+  $('.js-btn-container').on('click', '.js-next-btn', event => {
+    event.preventDefault();
+    console.log('`userNext` ran');
+    $('.js-btn').hide();
     generateTheQuestion();
     incrementQuestionIndex();
     });
 }
 //function 'userSubmit' only submits when one is selected and creates the submit button
 function userSubmit() {
-  $('.js-btn-container').on('submit', function(event) {
+  $('.js-btn-container').on('click', function(event) {
     event.preventDefault();
     console.log('`userSubmit` ran');
-    //$('.js-submit-btn').hide();
-    //$('.js-answers-list').children().remove();
+    $('.js-submit-btn').hide();
+    $('.js-answers-list').children().remove();
     let choice = $('input:checked');
     let currentAnswer = choice.val();
     let correctAnswer = STATES[currentQuestionIndex].answer;
@@ -105,10 +133,10 @@ function wrongAnswer() {
 //push the score to the array and to the display
 function incrementScore() {
   USERRESPONSES.push(true);
-  $('.js-currentScor').text(USERRESPONSES.length);
+  $('.js-currentScore').text(USERRESPONSES.length);
 }
 
-//This function generates the question
+//This function generates the question REMOVE
 function generateTheQuestion() {
   console.log("`generateTheQuestion` ran");
   renderQuestion();
@@ -143,8 +171,7 @@ function renderAnswers(){
 }
 //Render Function onReady
 function quizApp() {
-  userStart();
-  userSubmit();
+  initEventHandlers();
 }
 
 $(quizApp);

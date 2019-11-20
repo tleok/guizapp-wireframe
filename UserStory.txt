@@ -1,0 +1,13 @@
+application loads => Show quiz start screen => wait for user to hit Start
+
+User clicks start on start screen => Show question 1 => wait for user to select an answer & to hit submit
+
+User Hits submit => Show Results Page => Wait for user to click next question
+
+User Clicks next question => was last question?
+                                           Yes => Show final Score screen
+                                           No => show next question(go to line 3)
+
+Show Final Score => wait for user to select restart 
+
+User clicks restart => go to line 1(restart quiz)
