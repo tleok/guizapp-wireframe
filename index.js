@@ -60,15 +60,50 @@ const USERRESPONSES = [];
 let currentQuestionIndex = 0;
 //---------let questionComponents = STATES[currentQuestionIndex];
 
-//function 'userSubmitClick' takes the start, submit, and next question clicks
-function userSubmitClick() {
-  $('#js-submission-form').on('click', '.js-submit-btn', event => {
+//function 'userSubmitClick' takes the start, submit, and next question
+function userStart() {
+  $('#js-submission-form').on('click', '.js-start-btn', event => {
     event.preventDefault();
-    console.log('`userSubmitClick` ran');
+    console.log('`userStart` ran');
+    $('.js-start-btn').hide();
     generateTheQuestion();
     incrementQuestionIndex();
     });
 }
+//function 'userSubmit' only submits when one is selected and creates the submit button
+function userSubmit() {
+  $('.js-btn-container').on('click', '.js-submit-btn', event => {
+    event.preventDefault();
+    console.log('`userSubmit` ran');
+    $('.js-submit-btn').hide();
+    $('.js-answers-list').children().remove();
+    let choice = $('input:checked');
+    let currentAnswer = choice.val();
+    let correctAnswer = STATES[currentQuestionIndex].answer;
+    if (currentAnswer === correctAnswer) {
+      rightAnswer();
+    } else {
+      wrongAnswer();
+    }
+    });
+}
+//-------------------------------
+function rightAnswer() {
+  $('.js-theQuestion').html(
+    `<h3>Your answer is correct!</h3>
+    <button type="submit" class="next-btn js-next-btn" >Next Question</button>`
+  );
+  USERRESPONSES.push(true);
+}
+//resulting feedback if a selected answer is incorrect
+function wrongAnswer() {
+  $('.response').html(
+    `<h3>That's the wrong answer...</h3>
+    <button type="submit" class="next-btn js-next-btn" >Next Question</button>`
+  );
+}
+//--------------------------------
+
 //This function generates the question
 function generateTheQuestion() {
   console.log("`generateTheQuestion` ran");
@@ -79,26 +114,33 @@ function renderQuestion(){
   console.log("`renderQuestion` ran")
   $('.js-theQuestion').text(STATES[currentQuestionIndex].question);
   renderAnswers();
+
 }
-function renderAnswers(){
-  console.log("`renderAnswers` ran")
-$('.js-theQuestion').text(STATES[currentQuestionIndex].question);
-console.log(currentQuestionIndex);
-}
+//Not Sure where to put this yet ----
+//$('.js-answers-list').children().remove();
+//But it works to remove the items, i think it needs to go into the clicks.
+
 //Increment the Questions to move through the questions
 function incrementQuestionIndex(){
   currentQuestionIndex++;
   $('.js-currentQuestionNumber').text(currentQuestionIndex);
 }
 //Increment the Answers
-function incrementAnswerIndex(){
-  currentAnswerIndex++;
-  STATES[currentQuestionIndex].allAnswers.forEach(function)
+function renderAnswers(){
+  console.log("`renderAnswers` ran")
+  STATES[currentQuestionIndex].allAnswers.forEach(function(answerValue, answerIndex){
+    //$('.js-answers-list').children().remove();
+    $(`<div class="answerContainer js-answerContainer" for="${answerIndex}">
+        <input class="radio js-radio" type="radio" id="${answerIndex}" value="${answerValue}" name="answer" required>
+        <span>${answerValue}</span>
+       </div>`).appendTo('.js-answers-list');
+  })
+  $(`<button type="submit" class="submit-btn js-submit-btn" >Submit</button>`).appendTo('.js-btn-container');
 }
 //Render Function onReady
 function quizApp() {
-  //generateTheQuestion();
-  userSubmitClick();
+  userStart();
+  userSubmit();
 }
 
 $(quizApp);
