@@ -109,19 +109,26 @@ function showSummary(){
   console.log("`showSummary` ran")
   $('.js-answers-list').children().remove()
   let questionComponents = STATES[currentQuestionIndex];
-  let currentAnswer = $(this).val();
+  let currentAnswer = $("input[type=radio][name=answer]:checked").val();
   let correctAnswer = questionComponents.answer;
-  console.log(currentAnswer);
-  if (currentAnswer === correctAnswer) {
+  if (currentAnswer === undefined){
+      console.log("Please Select Something")  
+      console.log(currentAnswer);
+      event.preventDefault();
+      console.log(correctAnswer)
+  } else if (currentAnswer === correctAnswer) {
     $('.js-theQuestion').text('Your answer is correct!');
     USERRESPONSES.push(true);
     $('.js-currentScore').text(USERRESPONSES.length);
+        //Increment the currentIndex
+        currentQuestionIndex++;
   } else {
     $('.response').html('Sorry that`s the wrong answer...keep practicing.');
+        //Increment the currentIndex
+        currentQuestionIndex++;
   }
   $('.js-btn').text('Next Question');
-    //Increment the currentIndex
-    currentQuestionIndex++;
+
 }
 //--------------------------------------------------------------------------
 //Show the Final Summary
