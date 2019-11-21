@@ -87,83 +87,51 @@ function initEventHandlers() {
 }
 //Show the Next question
 function showNextQuestion() {
-  renderQuestion();
-  incrementQuestionIndex();
-}
-//show the Summary
-function showSummary() {
-  renderQuestion();
-  incrementQuestionIndex();
-}
-//Show the Final Summary
-function showFinalSummary() {
-  generateTheQuestion();
-  incrementQuestionIndex();
-}
-//Change the Question text to the current Question and invoke the answers
-function renderQuestion(){
   console.log("`renderQuestion` ran")
   let questionComponents = STATES[currentQuestionIndex];
   $('.js-theQuestion').text(questionComponents.question);
-  renderAnswers();
-}
-//Increment the Answers
-function renderAnswers(){
-  console.log("`renderAnswers` ran")
+  //renderAnswers();
   STATES[currentQuestionIndex].allAnswers.forEach(function(answerValue, answerIndex){
-    //$('.js-answers-list').children().remove();
     $(`<div class="answerContainer js-answerContainer" for="${answerIndex}">
-        <input class="radio js-radio" type="radio" id="${answerIndex}" value="${answerValue}" name="answer" required>
-        <span>${answerValue}</span>
-       </div>`).appendTo('.js-answers-list');
+          <input class="radio js-radio" type="radio" id="${answerIndex}" value="${answerValue}" name="answer" required>
+          <span>${answerValue}</span>
+        </div>`).appendTo('.js-answers-list');
   })
   $('.js-btn').text('Submit');
+  $('.js-currentQuestionNumber').text(currentQuestionIndex +1);
 }
-// function renderSummary
-function renderSummary(){
-  console.log("`renderSummary` ran")
-  $('.js-answers-list').children().remove();
-  $('.js-theQuestion').text(questionComponents.question);
-  renderResult();
-  $('.js-btn').text('Submit');
+function renderAnswers(){
+  console.log("`renderAnswers` ran")
+
 }
-//function renderResult
-function renderResult(){
-  console.log("`renderSummary` ran")
+//show the Summary
+function showSummary(){
+  console.log("`showSummary` ran")
   $('.js-answers-list').children().remove()
-  let choice = $('input:checked');
-  let currentAnswer = choice.val();
-  let correctAnswer = STATES[currentQuestionIndex].answer;
+  let questionComponents = STATES[currentQuestionIndex];
+  let currentAnswer = $(this).val();
+  let correctAnswer = questionComponents.answer;
+  console.log(currentAnswer);
   if (currentAnswer === correctAnswer) {
-    rightAnswer();
+    $('.js-theQuestion').text('Your answer is correct!');
+    USERRESPONSES.push(true);
+    $('.js-currentScore').text(USERRESPONSES.length);
   } else {
-    wrongAnswer();
+    $('.response').html('Sorry that`s the wrong answer...keep practicing.');
   }
   $('.js-btn').text('Next Question');
+    //Increment the currentIndex
+    currentQuestionIndex++;
 }
-//Right Answer display
-function rightAnswer() {
-  $('.js-theQuestion').html(`<h3>Your answer is correct!</h3>`);
-  incrementScore();
-}
-//wrong Answer display
-function wrongAnswer() {
-  $('.response').html(`<h3>Sorry that's the wrong answer...keep practicing.</h3>`);
-}
-//push the score to the array and to the display
-function incrementScore() {
-  USERRESPONSES.push(true);
-  $('.js-currentScore').text(USERRESPONSES.length);
+//--------------------------------------------------------------------------
+//Show the Final Summary
+function showFinalSummary() {
+  generateTheQuestion();
 }
 
-//Increment the Questions to move through the questions
-function incrementQuestionIndex(){
-  currentQuestionIndex++;
-  $('.js-currentQuestionNumber').text(currentQuestionIndex);
-}
-
-
+//-----------------------
 //Render Function onReady
+//-----------------------
 function quizApp() {
   initEventHandlers();
 }
