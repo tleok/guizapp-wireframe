@@ -60,29 +60,46 @@ const USERRESPONSES = [];
 let currentQuestionIndex = 0;
 let quizStarted = false;
 let isSubmittingAnswer = false;
+let selectedAnswer = "";
+let quizFinished = false;
 //---------let questionComponents = STATES[currentQuestionIndex];
 
 //function 'userStart' takes the start, submit, and next question
 //assigns the click event handler on the start button
 function initEventHandlers() {
-  $('#js-submission-form').on('click', '.js-btn', event => {
+  $('#js-submission-form').on('submit', event => {
     event.preventDefault();
-    console.log('`userStart` ran');
+    console.log('`ButtonClicked` ran');
+    if (quizFinished){
+      window.location.reload();
+    }
     if(quizStarted === false){
       quizStarted = true;
       isSubmittingAnswer = true;
       showNextQuestion();
+    console.log('Quiz Started');
     } else if(isSubmittingAnswer === true){
         isSubmittingAnswer = false;
         showSummary();
+        console.log('Show Summary');
+        if(currentQuestionIndex === STATES.length){
+          $('.js-btn').text('See Final Results');
+        }
     } else{
-        if(currentQuestionIndex === STATES.length -1){
-          //Show Final Summary
+        if(currentQuestionIndex === STATES.length){
+          showFinalSummary();
+          console.log('Showing Quiz Results');
+          quizFinished = true;
         } else{
           isSubmittingAnswer = true;
           showNextQuestion();
+          console.log('Showing Question ',currentQuestionIndex +1);
         }
     }
+    });
+    $( ".js-answers-list" ).on( "click", "input", function() { 
+      selectedAnswer = $(".js-answers-list input:checked" ).val();
+      console.log('User Selected ', selectedAnswer)
     });
 }
 //Show the Next question
@@ -90,8 +107,8 @@ function showNextQuestion() {
   console.log("`renderQuestion` ran")
   let questionComponents = STATES[currentQuestionIndex];
   $('.js-theQuestion').text(questionComponents.question);
-  //renderAnswers();
   STATES[currentQuestionIndex].allAnswers.forEach(function(answerValue, answerIndex){
+    //change div to a plain li
     $(`<div class="answerContainer js-answerContainer" for="${answerIndex}">
           <input class="radio js-radio" type="radio" id="${answerIndex}" value="${answerValue}" name="answer" required>
           <span>${answerValue}</span>
@@ -100,40 +117,59 @@ function showNextQuestion() {
   $('.js-btn').text('Submit');
   $('.js-currentQuestionNumber').text(currentQuestionIndex +1);
 }
-function renderAnswers(){
-  console.log("`renderAnswers` ran")
-
-}
 //show the Summary
 function showSummary(){
   console.log("`showSummary` ran")
   $('.js-answers-list').children().remove()
   let questionComponents = STATES[currentQuestionIndex];
-  let currentAnswer = $("input[type=radio][name=answer]:checked").val();
   let correctAnswer = questionComponents.answer;
-  if (currentAnswer === undefined){
+  if (selectedAnswer === undefined){
       console.log("Please Select Something")  
-      console.log(currentAnswer);
-      event.preventDefault();
+      console.log(selectedAnswer);
       console.log(correctAnswer)
-  } else if (currentAnswer === correctAnswer) {
+  } else if (selectedAnswer === correctAnswer) {
     $('.js-theQuestion').text('Your answer is correct!');
     USERRESPONSES.push(true);
     $('.js-currentScore').text(USERRESPONSES.length);
         //Increment the currentIndex
         currentQuestionIndex++;
+        console.log("Here in correct")  
+        $('.js-btn').text('Next Question');
   } else {
-    $('.response').html('Sorry that`s the wrong answer...keep practicing.');
+    $('.js-theQuestion').text('Sorry that`s the wrong answer...keep practicing.');
         //Increment the currentIndex
         currentQuestionIndex++;
+        console.log("Here in wrong")
+        console.log(selectedAnswer);  
+        $('.js-btn').text('Next Question');
   }
-  $('.js-btn').text('Next Question');
-
 }
 //--------------------------------------------------------------------------
 //Show the Final Summary
 function showFinalSummary() {
-  generateTheQuestion();
+  //initalize the finalscore
+  let finalScore = USERRESPONSES.length;
+  $('.js-theQuestion').text('Lets See how you did...')
+  if(USERRESPONSES.length >= 8){
+  $(`<div>
+      <span>Great Work</span>
+     </div>`).appendTo('.js-answers-list');
+  } else if (USERRESPONSES.length >=5){
+    //only use single quotes or double quotes. Decide Now
+    //DOnt spend days trying to reverse engineer what they do. do what you know how to do. Look over material if you need.
+    //Also either use ; or dont it doesnt look good to have inconsstencies
+    //also make sure the code looks clean like the divs need to line up and everything needs proper indenting
+    //also make sure you are consistent with spaces or no spaces lik after a function (){} or () {} not both
+    //Quotes need to be meaningful. Dont just add them for debuging. Also NO console.logs.
+    $(`<div>
+      <span>Good Effort</span>
+    </div>`).appendTo('.js-answers-list');
+  } else {
+    $(`<div>
+    <span>Keep Practicing</span>
+  </div>`).appendTo('.js-answers-list');
+  }
+  $('.js-btn').text('Restart Quiz');
 }
 
 //-----------------------
@@ -144,44 +180,4 @@ function quizApp() {
 }
 
 $(quizApp);
-
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-//-------------------------------------------------------------------
-//function 'userNext' takes the start, submit, and next question
-// function userNext() {
-//   $('.js-btn-container').on('click', '.js-next-btn', event => {
-//     event.preventDefault();
-//     console.log('`userNext` ran');
-//     $('.js-btn').hide();
-//     generateTheQuestion();
-//     incrementQuestionIndex();
-//     });
-// }
-//function 'userSubmit' only submits when one is selected and creates the submit button
-// function userSubmit() {
-//   $('.js-btn-container').on('click', function(event) {
-//     event.preventDefault();
-//     console.log('`userSubmit` ran');
-//     $('.js-submit-btn').hide();
-//     $('.js-answers-list').children().remove();
-//     let choice = $('input:checked');
-//     let currentAnswer = choice.val();
-//     let correctAnswer = STATES[currentQuestionIndex].answer;
-//     if (currentAnswer === correctAnswer) {
-//       rightAnswer();
-//     } else {
-//       wrongAnswer();
-//     }
-//     });
-// }
-
-
-
-//Not Sure where to put this yet ----
-//$('.js-answers-list').children().remove();
-//But it works to remove the items, i think it needs to go into the clicks.
-
-
-
 
