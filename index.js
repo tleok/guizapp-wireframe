@@ -62,7 +62,6 @@ let quizStarted = false;
 let isSubmittingAnswer = false;
 let selectedAnswer = "";
 let quizFinished = false;
-//---------let questionComponents = STATES[currentQuestionIndex];
 
 //function 'userStart' takes the start, submit, and next question
 //assigns the click event handler on the start button
@@ -153,6 +152,7 @@ function showFinalSummary() {
   if(USERRESPONSES.length >= 8){
   $(`<div>
       <span>Great Work</span>
+      <span>${finalScore}/10</span>
      </div>`).appendTo('.js-answers-list');
   } else if (USERRESPONSES.length >=5){
     //only use single quotes or double quotes. Decide Now
@@ -163,10 +163,12 @@ function showFinalSummary() {
     //Quotes need to be meaningful. Dont just add them for debuging. Also NO console.logs.
     $(`<div>
       <span>Good Effort</span>
+      <span>${finalScore}/10</span>
     </div>`).appendTo('.js-answers-list');
   } else {
     $(`<div>
     <span>Keep Practicing</span>
+    <span>${finalScore}/10</span>
   </div>`).appendTo('.js-answers-list');
   }
   $('.js-btn').text('Restart Quiz');
