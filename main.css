@@ -1,40 +1,56 @@
 * {
     box-sizing: border-box;
+    background-color: #3b3f46;
+    color: #c5eff7;
+    font-family: 'Century Gothic', sans-serif;
   }
   
-header h1 {
-  text-align: center;
-}
+  body {
+    font-family: "Roboto", sans-serif;
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .statusbar {
-    border: 1px solid grey;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid #c5eff7;
+    padding: 2px;
     text-align: center;
   }
 
   .statusbar h1 {
     display: inline;
-    padding: 20px;
+    padding: 10px;
   }
 
   .container {
     max-width: 600px;
     margin: 0 auto;
-    border: 1px solid grey;
-    font-family: 'Roboto', sans-serif;
+    border: 1px solid #c5eff7;
+    font-family: 'Century Gothic', sans-serif;
 
   }
   
-  .answers-list > li {
-    margin-bottom: 20px;
-    padding: 20px;
+  .answers-list > div {
+    margin-bottom: 10px;
+    padding: 10px;
   }
   
  main {
     padding: 40px;
   }
 
-  .submit-btn {
-    margin-left: auto;
-    margin-right: auto;
+  .btn {
+    display: flex;
+    justify-content: center;
+    border-color: 1px solid #c5eff7;
+    background-color: black;
   }
