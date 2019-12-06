@@ -112,10 +112,12 @@ function showSummary(){
   let correctAnswer = questionComponents.answer;
   if (selectedAnswer === correctAnswer) {
     $('.js-theQuestion').text('Your answer is correct!')
-        USERRESPONSES.push(true);
+    USERRESPONSES.push(true);
     $('.js-currentScore').text(USERRESPONSES.length)
-        currentQuestionIndex++;
-        $('.js-btn').text('Next Question')
+    currentQuestionIndex++;
+    $('.js-btn').text('Next Question')
+    $('.js-image').html(
+      `<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images" width="200px">`)
   } else {
     $('.js-theQuestion').text('Sorry that`s the wrong answer...keep practicing.')
         currentQuestionIndex++;
