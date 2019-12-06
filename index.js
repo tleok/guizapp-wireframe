@@ -65,6 +65,7 @@ function initEventHandlers(){
     event.preventDefault()
     if (quizFinished){
       window.location.reload()
+      return
     }
     if(quizStarted === false){
       quizStarted = true;
@@ -94,7 +95,8 @@ function initEventHandlers(){
 function showNextQuestion(){
   console.log('`renderQuestion` ran')
   let questionComponents = STATES[currentQuestionIndex]
-  $('.js-theQuestion').text(questionComponents.question)
+  $('.js-theQuestion > p').text(questionComponents.question)
+  $('.js-theQuestion > img').remove()
   STATES[currentQuestionIndex].allAnswers.forEach(function(answerValue, answerIndex){
     $(`<div for='${answerIndex}'>
           <input class='radio js-radio' type='radio' id='${answerIndex}' value='${answerValue}' name='answer' required>
@@ -111,23 +113,24 @@ function showSummary(){
   let questionComponents = STATES[currentQuestionIndex]
   let correctAnswer = questionComponents.answer;
   if (selectedAnswer === correctAnswer) {
-    $('.js-theQuestion').text('Your answer is correct!')
+    $('.js-theQuestion > p').text('Your answer is correct!')
     USERRESPONSES.push(true);
     $('.js-currentScore').text(USERRESPONSES.length)
     currentQuestionIndex++;
     $('.js-btn').text('Next Question')
-    $('.js-image').html(
-      `<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images" width="200px">`)
+    $(`<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="200px">`).insertAfter('.js-theQuestion > p')
   } else {
-    $('.js-theQuestion').text('Sorry that`s the wrong answer...keep practicing.')
-        currentQuestionIndex++;
-        $('.js-btn').text('Next Question')
+    $('.js-theQuestion > p').text('Sorry that`s the wrong answer...keep practicing.')
+    currentQuestionIndex++;
+    $('.js-btn').text('Next Question')
+    $(`<img src="stock_photos/lots_of_maps.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="200px">`).insertAfter('.js-theQuestion > p')
   }
 }
 
 function showFinalSummary(){
   let finalScore = USERRESPONSES.length;
-  $('.js-theQuestion').text('Lets See how you did...')
+  $('.js-theQuestion > p').text('Lets See how you did...')
+  $('.js-theQuestion > img').attr('src', 'stock_photos/some_pins.jpg')
   if(USERRESPONSES.length >= 8){
   $(`<div>
       <span>Great Work</span>
