@@ -98,10 +98,10 @@ function showNextQuestion(){
   $('.js-theQuestion > p').text(questionComponents.question)
   $('.js-theQuestion > img').remove()
   STATES[currentQuestionIndex].allAnswers.forEach(function(answerValue, answerIndex){
-    $(`<div for='${answerIndex}'>
+    $(`<li for='${answerIndex}'>
           <input class='radio js-radio' type='radio' id='${answerIndex}' value='${answerValue}' name='answer' required>
           <span>${answerValue}</span>
-       </div>`).appendTo('.js-answers-list')
+       </li>`).appendTo('.js-answers-list')
   })
   $('.js-btn').text('Submit')
   $('.js-currentQuestionNumber').text(currentQuestionIndex +1)
@@ -118,12 +118,12 @@ function showSummary(){
     $('.js-currentScore').text(USERRESPONSES.length)
     currentQuestionIndex++;
     $('.js-btn').text('Next Question')
-    $(`<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
+    $(`<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images">`).insertAfter('.js-theQuestion > p')
   } else {
       $('.js-theQuestion > p').text('Sorry that`s the wrong answer...keep practicing.')
       currentQuestionIndex++;
       $('.js-btn').text('Next Question')
-      $(`<img src="stock_photos/lots_of_maps.jpg" alt="a pile of paper maps" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
+      $(`<img src="stock_photos/lots_of_maps.jpg" alt="a pile of paper maps" class="images js-images">`).insertAfter('.js-theQuestion > p')
   }
 }
 

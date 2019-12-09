@@ -6,31 +6,38 @@
 
 html{
   background-image: url("stock_photos/flag_background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
 }
 
 header{
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   padding: 20px;
 }
 
 .statusbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
   border-bottom: 1px solid #c5eff7;
   border-top: 1px solid #c5eff7;
-  padding: 20px;
   align-items: center;
+  padding: 10px;
 }
 
 .statusbar h1 {
   display: inline;
-  padding: 20px;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 320px;
+  min-width: 95vw;
 }
 
 main {
@@ -44,10 +51,30 @@ input[type=radio] {
   margin: 10px;
 }
 
-.js-container{
+.answers-list li{
+  width: 90%;
+  height: 50px;
+  border: 1px solid #c5eff7;
+  margin-bottom: 10px;
+  padding-right: 50px;
+}
+
+.answers-list {
+list-style: none;
+}
+
+.images {
+  width: 100%;
+}
+
+.container{
+  max-width: 600px;
+  text-align: center;
   background-color: #3b3f46;
   border: 1px solid #c5eff7;
   border-radius: 6px 6px 6px 6px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn {
