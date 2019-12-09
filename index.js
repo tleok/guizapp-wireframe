@@ -54,7 +54,7 @@ const STATES = [
 ]
 
 const USERRESPONSES = []
-let currentQuestionIndex = 0
+let currentQuestionIndex = 9
 let quizStarted = false
 let isSubmittingAnswer = false
 let selectedAnswer = ''
@@ -118,12 +118,12 @@ function showSummary(){
     $('.js-currentScore').text(USERRESPONSES.length)
     currentQuestionIndex++;
     $('.js-btn').text('Next Question')
-    $(`<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="200px">`).insertAfter('.js-theQuestion > p')
+    $(`<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
   } else {
     $('.js-theQuestion > p').text('Sorry that`s the wrong answer...keep practicing.')
     currentQuestionIndex++;
     $('.js-btn').text('Next Question')
-    $(`<img src="stock_photos/lots_of_maps.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="200px">`).insertAfter('.js-theQuestion > p')
+    $(`<img src="stock_photos/lots_of_maps.jpg" alt="a pile of paper maps" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
   }
 }
 
@@ -131,21 +131,22 @@ function showFinalSummary(){
   let finalScore = USERRESPONSES.length;
   $('.js-theQuestion > p').text('Lets See how you did...')
   $('.js-theQuestion > img').attr('src', 'stock_photos/some_pins.jpg')
+  $('.js-theQuestion > img').attr('alt', 'a US map with some pins in it showing different places')
   if(USERRESPONSES.length >= 8){
   $(`<div>
-      <span>Great Work</span>
-      <span>${finalScore}/10</span>
-     </div>`).appendTo('.js-answers-list')
+      <p>${finalScore}/10</p>
+      <p>Great Work</p>
+     </div>`).appendTo('.js-theQuestion')
   } else if (USERRESPONSES.length >=5){
     $(`<div>
-      <span>Good Effort</span>
-      <span>${finalScore}/10</span>
-    </div>`).appendTo('.js-answers-list')
+      <p>${finalScore}/10</p>
+      <p>Good Effort</p>
+    </div>`).appendTo('.js-theQuestion')
   } else {
     $(`<div>
-    <span>Keep Practicing</span>
-    <span>${finalScore}/10</span>
-  </div>`).appendTo('.js-answers-list')
+    <p>${finalScore}/10</p>
+    <p>Keep Practicing</p>
+  </div>`).appendTo('.js-theQuestion')
   }
   $('.js-btn').text('Restart Quiz')
 }
