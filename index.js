@@ -87,9 +87,9 @@ function initEventHandlers(){
         }
     }
     })
-    $( '.js-answers-list' ).on( 'click', 'input', function(){ 
-      selectedAnswer = $('.js-answers-list input:checked' ).val()
-    })
+  $( '.js-answers-list' ).on( 'click', 'input', function(){ 
+    selectedAnswer = $('.js-answers-list input:checked' ).val()
+  })
 }
 //Show the Next question
 function showNextQuestion(){
@@ -101,7 +101,7 @@ function showNextQuestion(){
     $(`<div for='${answerIndex}'>
           <input class='radio js-radio' type='radio' id='${answerIndex}' value='${answerValue}' name='answer' required>
           <span>${answerValue}</span>
-        </div>`).appendTo('.js-answers-list')
+       </div>`).appendTo('.js-answers-list')
   })
   $('.js-btn').text('Submit')
   $('.js-currentQuestionNumber').text(currentQuestionIndex +1)
@@ -120,10 +120,10 @@ function showSummary(){
     $('.js-btn').text('Next Question')
     $(`<img src="stock_photos/lots_of_pins.jpg" alt="a map of the USA with lots of pins in different places" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
   } else {
-    $('.js-theQuestion > p').text('Sorry that`s the wrong answer...keep practicing.')
-    currentQuestionIndex++;
-    $('.js-btn').text('Next Question')
-    $(`<img src="stock_photos/lots_of_maps.jpg" alt="a pile of paper maps" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
+      $('.js-theQuestion > p').text('Sorry that`s the wrong answer...keep practicing.')
+      currentQuestionIndex++;
+      $('.js-btn').text('Next Question')
+      $(`<img src="stock_photos/lots_of_maps.jpg" alt="a pile of paper maps" class="images js-images" width="350px">`).insertAfter('.js-theQuestion > p')
   }
 }
 
@@ -133,21 +133,21 @@ function showFinalSummary(){
   $('.js-theQuestion > img').attr('src', 'stock_photos/some_pins.jpg')
   $('.js-theQuestion > img').attr('alt', 'a US map with some pins in it showing different places')
   if(USERRESPONSES.length >= 8){
-  $(`<div>
-      <p>${finalScore}/10</p>
-      <p>Great Work</p>
-     </div>`).appendTo('.js-theQuestion')
+    $(`<div>
+        <p>${finalScore}/10</p>
+        <p>Great Work</p>
+      </div>`).appendTo('.js-theQuestion')
   } else if (USERRESPONSES.length >=5){
-    $(`<div>
-      <p>${finalScore}/10</p>
-      <p>Good Effort</p>
-    </div>`).appendTo('.js-theQuestion')
+      $(`<div>
+          <p>${finalScore}/10</p>
+          <p>Good Effort</p>
+        </div>`).appendTo('.js-theQuestion')
   } else {
-    $(`<div>
-    <p>${finalScore}/10</p>
-    <p>Keep Practicing</p>
-  </div>`).appendTo('.js-theQuestion')
-  }
+      $(`<div>
+          <p>${finalScore}/10</p>
+          <p>Keep Practicing</p>
+        </div>`).appendTo('.js-theQuestion')
+    }
   $('.js-btn').text('Restart Quiz')
 }
 
