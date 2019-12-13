@@ -54,7 +54,7 @@ const STATES = [
 ]
 
 const USERRESPONSES = []
-let currentQuestionIndex = 9
+let currentQuestionIndex = 0
 let quizStarted = false
 let isSubmittingAnswer = false
 let selectedAnswer = ''
