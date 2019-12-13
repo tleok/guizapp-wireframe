@@ -100,7 +100,6 @@ function initEventHandlers(){
   })
 }
 function showNextQuestion(){
-  console.log('`renderQuestion` ran')
   let questionComponents = STATES[currentQuestionIndex]
   $('.js-theQuestion > p').text(questionComponents.question)
   $('.js-theQuestion > img').remove()
@@ -115,7 +114,6 @@ function showNextQuestion(){
 }
 
 function showSummary(){
-  console.log('`showSummary` ran')
   $('.js-answers-list').children().remove()
   let questionComponents = STATES[currentQuestionIndex]
   let correctAnswer = questionComponents.answer;
