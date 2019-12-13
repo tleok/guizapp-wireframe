@@ -87,11 +87,18 @@ function initEventHandlers(){
         }
     }
     })
-  $( '.js-answers-list' ).on( 'click', 'input', function(){ 
+  $( '.js-answers-list' ).on( 'click', 'li', function(){ 
+    //Apply the Same thing from lines 92 to 96 to the changing of color and border to the li als make sure that you actually need line 96
+    //finish going through and make sure there are no console.logs
+    //also make sure all the comments are removed.
+    //add the things needed for the otherpart and resubmit then submit this one too.
+    $('.js-answers-list > li > input').each(function(){
+      $(this).removeAttr('checked')
+    })
+    $(this).children('input').attr('checked', true)
     selectedAnswer = $('.js-answers-list input:checked' ).val()
   })
 }
-//Show the Next question
 function showNextQuestion(){
   console.log('`renderQuestion` ran')
   let questionComponents = STATES[currentQuestionIndex]
