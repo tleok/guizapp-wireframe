@@ -88,10 +88,10 @@ function initEventHandlers(){
     }
     })
   $( '.js-answers-list' ).on( 'click', 'li', function(){ 
-    //Apply the Same thing from lines 92 to 96 to the changing of color and border to the li als make sure that you actually need line 96
-    //finish going through and make sure there are no console.logs
-    //also make sure all the comments are removed.
-    //add the things needed for the otherpart and resubmit then submit this one too.
+    $('.js-answers-list > li').each(function(){
+      $(this).removeAttr('style')
+    })
+    $(this).attr('style', 'border: 1px solid #2abb9b;background-color: #3b3f40;font-size: 17px;font-style: italic;')
     $('.js-answers-list > li > input').each(function(){
       $(this).removeAttr('checked')
     })
