@@ -2,52 +2,52 @@
 
 const STATES = [
     {
-    question: 'What is the Capitol of Wisconsin?', 
+    question: 'What is the Capital of Wisconsin?', 
     allAnswers: ['Richmond', 'Olympia', 'Charleston', 'Madison', 'Cheyenne'],
     answer: 'Madison'
     },
     {
-    question: 'What is the Capitol of Alabama?', 
+    question: 'What is the Capital of Alabama?', 
     allAnswers: ['Montgomery', 'Anchorage', 'Phoenix', 'Little Rock', 'Sacramento'],
     answer: 'Montgomery'
     },
     {
-    question: 'What is the Capitol of South Dakota?', 
+    question: 'What is the Capital of South Dakota?', 
     allAnswers: ['Pierre', 'Nashville', 'Austin', 'Salt Lake City', 'Montpelier'],
     answer: 'Pierre'
     },
     {
-    question: 'What is the Capitol of Delaware?', 
+    question: 'What is the Capital of Delaware?', 
     allAnswers: ['Denver', 'Hartford', 'Dover', 'Tallahassee', 'Atlanta'],
     answer: 'Dover'
     },
     {
-    question: 'What is the Capitol of Oregon?', 
+    question: 'What is the Capital of Oregon?', 
     allAnswers: ['Oklahoma City', 'Salem', 'Harrisburg', 'Providence', 'Columbia'],
     answer: 'Salem'
     },
     {
-    question: 'What is the Capitol of Illinois?', 
+    question: 'What is the Capital of Illinois?', 
     allAnswers: ['Honolulu', 'Boise', 'Springfield', 'Indianapolis', 'Des Moines'],
     answer: 'Springfield'
     },
     {
-    question: 'What is the Capitol of North Dakota?', 
+    question: 'What is the Capital of North Dakota?', 
     allAnswers: ['Santa Fe', 'Albany', 'Raleigh', 'Bismark', 'Columbus'],
     answer: 'Bismark'
     },
     {
-    question: 'What is the Capitol of Maine?', 
+    question: 'What is the Capital of Maine?', 
     allAnswers: ['Topeka', 'Frankfort', 'Baton Rouge', 'Augusta', 'Annapolis'],
     answer: 'Augusta'
     },
     {
-    question: 'What is the Capitol of Nevada?', 
+    question: 'What is the Capital of Nevada?', 
     allAnswers: ['Helena', 'Lincoln', 'Carson City', 'Concord', 'Trenton'],
     answer: 'Carson City'
     },
     {
-    question: 'What is the Capitol of Mississippi?', 
+    question: 'What is the Capital of Mississippi?', 
     allAnswers: ['Boston', 'Lansing', 'St. Paul', 'Jackson', 'Jefferson City'],
     answer: 'Jackson'
     },
